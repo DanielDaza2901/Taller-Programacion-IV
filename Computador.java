@@ -1,4 +1,4 @@
-package co.edu.itc.progrmacion;
+package biblioteca;
 
 import java.time.LocalDateTime;
 
@@ -46,5 +46,10 @@ public class Computador extends Recurso {
                 "Sistema Operativo=" + sistemaOperativo + "\n" +
                 "Tipo=" + tipo + "\n" +
                 "Fecha de Ingreso=" + getFechaIngreso() + "\n";
+    }
+
+    @Override
+    public String getTipo() {
+        return "Computador";
     }
 }
