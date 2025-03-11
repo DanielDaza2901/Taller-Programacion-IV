@@ -33,4 +33,6 @@ public abstract class Recurso {
 
     @Override
     public abstract String toString();
+
+    public abstract String getTipo();
 }
