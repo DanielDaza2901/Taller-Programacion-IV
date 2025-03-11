@@ -57,7 +57,102 @@ Si no usas Maven, puedes compilar manualmente como se indicó anteriormente.
 
 Ejecutar el Proyecto:
 
+## Parcial 1
+## Diferencia entre @Component y @Configuration en Spring.
+@Component se usa para marcar una clase como componente, mientras que @Configuration se usa para anotar una clase que define beans. 
 
+## Ejemplo de Inyección de Dependencia mediante Constructor:
+
+    @Component
+    public class ServicioEjemplo {
+        private final Repositorio<Libro> libroRepositorio;
+
+        @Autowired
+        public ServicioEjemplo(Repositorio<Libro> libroRepositorio) {
+            this.libroRepositorio = libroRepositorio;
+        }
+    }
+ Interfaz Genérica Repositorio<T>:
+
+    public interface Repositorio<T> {
+        void agregar(T elemento);
+        void eliminar(T elemento);
+        T buscar(String criterio);
+        Collection<T> obtenerTodos();
+    }
+## Explique el principio de inversión de control y cómo se aplica en esta solución.
+
+Principio de Inversión de Control (IoC):
+
+IoC delega el control de la creación y gestión de dependencias a un contenedor (Spring).
+
+## Refactorización del Servicio de Biblioteca (20 puntos)
+
+1.  Modificar ServicioBiblioteca:
+
+
+    @Service
+    public class ServicioBiblioteca {
+        private final Repositorio<Libro> libroRepositorio;
+        /
+
+        @Autowired
+        public ServicioBiblioteca(Repositorio<Libro> libroRepositorio,) {
+            
+        }
+    }
+    
+
+## Explique cómo funciona la inyección de propiedades en Spring utilizando @Value y qué precedencia tiene cada fuente.
+
+2.  Combinar Resultados de Múltiples Repositorios:
+
+    public Collection<Recurso> obtenerTodos() {
+        return Stream.of(libroRepositorio.obtenerTodos())
+                     .flatMap(Collection::stream)
+                     .collect(Collectors.toList());
+    }
+    
+
+### Implementación de la Clase Principal con Spring (20 puntos)
+
+1.  Clase Main:
+
+   
+    public class Main {
+        public static void main(String[] args) {
+            AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+            ServicioBiblioteca servicioBiblioteca = context.getBean(ServicioBiblioteca.class);
+
+        }
+    }
+    
+
+### Configuración de Spring y Lectura de Propiedades (20 puntos)
+
+1.  Archivo application.properties:
+
+    app.name=GestionBibliotecaSpring
+
+
+2.  Clase para Leer la Propiedad:
+
+   
+    @Component
+    public class AppNamePrinter {
+        @Value("${app.name}")
+        private String appName;
+
+        @PostConstruct
+        public void imprimirNombre() {
+            System.out.println("Nombre de la aplicación: " + appName);
+        }
+    }
+
+3.  Explicación de Inyección de Propiedades:
+
+      @Value: Se utiliza para inyectar valores de propiedades.
+      Precedencia: Properties > Environment Variables > Java System Properties.
 ## Integrantes
 
 - [Ivan Andres Salas Leiva]
