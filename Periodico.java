@@ -34,4 +34,9 @@ public class Periodico extends Recurso {
                 "Editorial=" + editorial + "\n" +
                 "Fecha de Ingreso=" + getFechaIngreso() + "\n";
     }
+
+    @Override
+    public String getTipo() {
+        return "Periodico";
+    }
 }
