@@ -42,4 +42,9 @@ public class Libro extends Recurso {
                 "Año=" + anio + "\n" +
                 "Fecha de Ingreso=" + getFechaIngreso() + "\n";
     }
+
+    @Override
+    public String getTipo() {
+        return "Libro";
+    }
 }
