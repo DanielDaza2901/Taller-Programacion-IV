@@ -1,84 +1,52 @@
 package co.edu.itc.progrmacion;
 
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
 import java.time.LocalDateTime;
 import java.time.Year;
-import java.util.Collection;
 import java.time.LocalDate;
+import java.util.Collection;
 
 public class Main {
+    public static void main(String[] args) {
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+        ServicioBiblioteca servicioBiblioteca = context.getBean(ServicioBiblioteca.class);
+        AppNamePrinter appNamePrinter = context.getBean(AppNamePrinter.class);
 
-   public static void main(String[] args) {
+        // Agregar recursos
+        Libro libro1 = new Libro("El Señor de los Anillos", LocalDateTime.now(), true, "J.R.R. Tolkien", "Editorial Planeta", Year.of(2001));
+        Libro libro2 = new Libro("Harry Potter", LocalDateTime.now(), true, "J.K. Rowling", "Editorial Scholastic", Year.of(1997));
+        Periodico periodico1 = new Periodico("El País", LocalDateTime.now(), true, LocalDate.now(), "Grupo PRISA");
+        Periodico periodico2 = new Periodico("El Mundo", LocalDateTime.now(), true, LocalDate.now(), "Unidad Editorial");
+        Computador computador1 = new Computador("PC-001", LocalDateTime.now(), true, "HP", "Pavilion", "Windows 10", TipoComputador.ESCRITORIO);
+        Computador computador2 = new Computador("PC-002", LocalDateTime.now(), true, "Dell", "Inspiron", "Ubuntu", TipoComputador.PORTATIL);
 
-       // Crear una instancia del servicio de biblioteca.
-       ServicioBiblioteca biblioteca = new ServicioBiblioteca();
+        servicioBiblioteca.agregarRecurso(libro1);
+        servicioBiblioteca.agregarRecurso(libro2);
+        servicioBiblioteca.agregarRecurso(periodico1);
+        servicioBiblioteca.agregarRecurso(periodico2);
+        servicioBiblioteca.agregarRecurso(computador1);
+        servicioBiblioteca.agregarRecurso(computador2);
 
-       // Crear recursos: libros.
-       Libro libro1 = new Libro("El Señor de los Anillos", LocalDateTime.now(), true,
-               "J.R.R. Tolkien", "Editorial Planeta", Year.of(2001));
-       Libro libro2 = new Libro("Harry Potter", LocalDateTime.now(), true,
-               "J.K. Rowling", "Editorial Scholastic", Year.of(1997));
-       Libro libro3 = new Libro("El Código Da Vinci", LocalDateTime.now(), true,
-               "Dan Brown", "Editorial Doubleday", Year.of(2003));
+        // Mostrar lista de recursos
+        System.out.println("Lista de Recursos:");
+        Collection<Recurso> recursos = servicioBiblioteca.obtenerTodos();
+        recursos.forEach(recurso -> System.out.println(recurso.toString()));
 
-       // Crear recursos: periódicos.
-       Periodico periodico1 = new Periodico("El País", LocalDateTime.now(), true,
-               LocalDate.now(), "Grupo PRISA");
-       Periodico periodico2 = new Periodico("El Mundo", LocalDateTime.now(), true,
-               LocalDate.now(), "Unidad Editorial");
-       Periodico periodico3 = new Periodico("La Vanguardia", LocalDateTime.now(), true,
-               LocalDate.now(), "Grupo Godó");
+        // Buscar y eliminar recurso
+        String criterioBusqueda = "HP";
+        Collection<Recurso> resultados = servicioBiblioteca.buscarRecursos(criterioBusqueda);
+        if (!resultados.isEmpty()) {
+            Recurso recursoAEliminar = resultados.iterator().next();
+            servicioBiblioteca.eliminarRecurso(recursoAEliminar);
+            System.out.println("\nRecurso eliminado: " + recursoAEliminar.getNombre());
+        }
 
-       // Crear recursos: computadores.
-       Computador computador1 = new Computador("PC-001", LocalDateTime.now(), true,
-               "HP", "Pavilion", "Windows 10", TipoComputador.ESCRITORIO);
-       Computador computador2 = new Computador("PC-002", LocalDateTime.now(), true,
-               "Dell", "Inspiron", "Ubuntu", TipoComputador.PORTATIL);
-       Computador computador3 = new Computador("PC-003", LocalDateTime.now(), true,
-               "Apple", "MacBook", "macOS", TipoComputador.PORTATIL);
+        // Imprimir nuevamente la lista de recursos
+        System.out.println("\nLista de Recursos Actualizada:");
+        servicioBiblioteca.obtenerTodos().forEach(recurso -> System.out.println(recurso.toString()));
 
-       // Agregar recursos a la biblioteca.
-       biblioteca.agregar(libro1);
-       biblioteca.agregar(libro2);
-       biblioteca.agregar(libro3);
-       biblioteca.agregar(periodico1);
-       biblioteca.agregar(periodico2);
-       biblioteca.agregar(periodico3);
-       biblioteca.agregar(computador1);
-       biblioteca.agregar(computador2);
-       biblioteca.agregar(computador3);
-
-       // Imprimir lista de recursos actual en la biblioteca.
-       System.out.println("Lista de Recursos:");
-       for (Recurso recurso : biblioteca.obtenerTodos()) {
-           System.out.println(recurso.toString());
-           System.out.println();
-       }
-
-       // Buscar recursos que coincidan con un criterio y imprimir resultados.
-       String criterio = "HP";
-       Collection<Recurso> resultados = biblioteca.buscarRecursos(criterio);
-       
-       System.out.println("Resultados de búsqueda para '" + criterio + "':");
-       
-       for (Recurso recurso : resultados) {
-           System.out.println(recurso.toString());
-           System.out.println();
-       }
-
-       // Tomar el primer resultado de la búsqueda y eliminarlo de la biblioteca.
-       if (!resultados.isEmpty()) {
-           Recurso primerResultado = resultados.iterator().next();
-           biblioteca.quitarRecurso(primerResultado);
-           System.out.println("Se ha eliminado el recurso: " + primerResultado.getNombre());
-           System.out.println();
-       }
-
-       // Volver a imprimir la lista de recursos actualizados.
-       System.out.println("Lista de Recursos Actualizada:");
-       
-       for (Recurso recurso : biblioteca.obtenerTodos()) {
-           System.out.println(recurso.toString());
-           System.out.println();
-       }
-   }
+        context.close();
+    }
 }
+
