@@ -153,6 +153,14 @@ IoC delega el control de la creación y gestión de dependencias a un contenedor
 
       @Value: Se utiliza para inyectar valores de propiedades.
       Precedencia: Properties > Environment Variables > Java System Properties.
+## Archivo application.properties
+Este archivo se utiliza para configurar propiedades de la aplicación, como nombres, versiones y configuraciones específicas del entorno. 
+Spring puede leer estas propiedades mediante la anotación @PropertySource y la inyección de valores con @Value.
+
+Ejemplo:
+
+app.name=GestionBibliotecaSpring
+
 ## Integrantes
 
 - [Ivan Andres Salas Leiva]
