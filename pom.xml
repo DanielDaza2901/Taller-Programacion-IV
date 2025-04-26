@@ -21,6 +21,7 @@
             <artifactId>spring-context</artifactId>
             <version>${spring.version}</version>
         </dependency>
+<<<<<<< HEAD
 
          <!-- Jakarta Annotation API (para @PostConstruct) -->
     <dependency>
@@ -32,6 +33,14 @@
              
         
 
+=======
+        
+
+        
+        
+    </dependencies>
+
+>>>>>>> dd070a7911ea1426b3b517f9b21e92e8d78dab4d
     <build>
         <plugins>
             <!-- Plugin para compilar con Maven -->
