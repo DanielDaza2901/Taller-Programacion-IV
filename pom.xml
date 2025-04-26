@@ -21,11 +21,16 @@
             <artifactId>spring-context</artifactId>
             <version>${spring.version}</version>
         </dependency>
-        
 
+         <!-- Jakarta Annotation API (para @PostConstruct) -->
+    <dependency>
+        <groupId>jakarta.annotation</groupId>
+        <artifactId>jakarta.annotation-api</artifactId>
+        <version>2.1.1</version>
+    </dependency>
+</dependencies>
+             
         
-        
-    </dependencies>
 
     <build>
         <plugins>

@@ -7,7 +7,7 @@ import java.util.Collection;
 import java.util.List;
 
 @Component
-public class LibroRepositorio implements Repositorio<Libro> {
+public class LibroRepositorio implements RecursoRepositorio<Libro> {
     private List<Libro> libros = new ArrayList<>();
 
     @Override
@@ -21,13 +21,12 @@ public class LibroRepositorio implements Repositorio<Libro> {
     }
 
     @Override
-    public Libro buscar(String criterio) {
+    public Collection<Libro> buscar(String criterio) {
         return libros.stream()
                 .filter(libro -> libro.coincideConCriterio(criterio))
-                .findFirst()
-                .orElse(null);
+                .toList();
     }
-
+    
     @Override
     public Collection<Libro> obtenerTodos() {
         return libros;

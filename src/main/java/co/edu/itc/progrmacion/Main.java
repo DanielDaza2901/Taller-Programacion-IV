@@ -11,8 +11,8 @@ public class Main {
     public static void main(String[] args) {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
         ServicioBiblioteca servicioBiblioteca = context.getBean(ServicioBiblioteca.class);
-        AppNamePrinter appNamePrinter = context.getBean(AppNamePrinter.class);
-        appNamePrinter.imprimirNombre();
+        //AppNamePrinter appNamePrinter = context.getBean(AppNamePrinter.class);
+        //appNamePrinter.imprimirNombre();
         
     
 

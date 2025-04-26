@@ -7,7 +7,7 @@ import java.util.Collection;
 import java.util.List;
 
 @Component
-public class ComputadorRepositorio implements Repositorio<Computador> {
+public class ComputadorRepositorio implements RecursoRepositorio<Computador> {
     private List<Computador> computadores = new ArrayList<>();
 
     @Override
@@ -21,11 +21,10 @@ public class ComputadorRepositorio implements Repositorio<Computador> {
     }
 
     @Override
-    public Computador buscar(String criterio) {
+    public Collection<Computador> buscar(String criterio) {
         return computadores.stream()
                 .filter(computador -> computador.coincideConCriterio(criterio))
-                .findFirst()
-                .orElse(null);
+                .toList();
     }
 
     @Override

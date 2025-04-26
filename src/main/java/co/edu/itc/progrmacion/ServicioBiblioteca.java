@@ -11,14 +11,14 @@ import java.util.stream.Stream;
 
 @Service
 public class ServicioBiblioteca {
-    private final Repositorio<Libro> libroRepositorio;
-    private final Repositorio<Periodico> periodicoRepositorio;
-    private final Repositorio<Computador> computadorRepositorio;
+    private final RecursoRepositorio<Libro> libroRepositorio;
+    private final RecursoRepositorio<Periodico> periodicoRepositorio;
+    private final RecursoRepositorio<Computador> computadorRepositorio;
 
     @Autowired
-    public ServicioBiblioteca(Repositorio<Libro> libroRepositorio,
-                               Repositorio<Periodico> periodicoRepositorio,
-                               Repositorio<Computador> computadorRepositorio) {
+    public ServicioBiblioteca(RecursoRepositorio<Libro> libroRepositorio,
+                               RecursoRepositorio<Periodico> periodicoRepositorio,
+                               RecursoRepositorio<Computador> computadorRepositorio) {
         this.libroRepositorio = libroRepositorio;
         this.periodicoRepositorio = periodicoRepositorio;
         this.computadorRepositorio = computadorRepositorio;
@@ -53,20 +53,16 @@ public class ServicioBiblioteca {
     }
 
     public Collection<Recurso> buscarRecursos(String criterio) {
-       List<Recurso> resultados = new ArrayList<>();
-       Libro libro = libroRepositorio.buscar(criterio);
-       Periodico periodico = periodicoRepositorio.buscar(criterio);
-       Computador computador = computadorRepositorio.buscar(criterio);
-
-        if(libro != null){
-            resultados.add(libro);
-        }
-        if(periodico != null){
-            resultados.add(periodico);
-        }
-       if(computador != null){
-            resultados.add(computador);
-        }
-       return resultados;
+        List<Recurso> resultados = new ArrayList<>();
+    
+        Collection<Libro> libros = libroRepositorio.buscar(criterio);
+        Collection<Periodico> periodicos = periodicoRepositorio.buscar(criterio);
+        Collection<Computador> computadores = computadorRepositorio.buscar(criterio);
+    
+        resultados.addAll(libros);
+        resultados.addAll(periodicos);
+        resultados.addAll(computadores);
+    
+        return resultados;
     }
 }
