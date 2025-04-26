@@ -9,7 +9,6 @@ Este proyecto implementa un sistema de gestión de biblioteca en Java(MAVEN), ut
 - Eliminación de recursos.
 
 ## Uso
-
 1. Compilar el proyecto con Maven: `mvn clean install`.
 2. Ejecutar la clase `Main` para probar las funcionalidades.
 
