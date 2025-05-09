@@ -4,5 +4,5 @@ public enum TipoComputador {
     PORTATIL,
     ESCRITORIO,
     TABLET,
-    COMPUTADOR,
+    COMPUTADOR
 }

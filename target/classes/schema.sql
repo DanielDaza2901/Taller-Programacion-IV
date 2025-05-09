@@ -1,0 +1,20 @@
+CREATE TABLE IF NOT EXISTS libro (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(255) NOT NULL,
+    fecha_ingreso DATE NOT NULL,
+    activo BOOLEAN DEFAULT TRUE
+);
+
+CREATE TABLE IF NOT EXISTS periodico (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(255) NOT NULL,
+    fecha_ingreso DATE NOT NULL,
+    activo BOOLEAN DEFAULT TRUE
+);
+
+CREATE TABLE IF NOT EXISTS computador (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(255) NOT NULL,
+    fecha_ingreso DATE NOT NULL,
+    activo BOOLEAN DEFAULT TRUE
+);
