@@ -15,39 +15,51 @@
     </properties>
 
     <dependencies>
-        <!-- Spring Context -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-<<<<<<< HEAD
-
-         <!-- Jakarta Annotation API (para @PostConstruct) -->
+    <!-- Spring Context Core -->
     <dependency>
-        <groupId>jakarta.annotation</groupId>
-        <artifactId>jakarta.annotation-api</artifactId>
-        <version>2.1.1</version>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-context</artifactId>
+        <version>6.2.6</version>
+    </dependency>
+
+    <dependency>
+       <groupId>jakarta.annotation</groupId>
+       <artifactId>jakarta.annotation-api</artifactId>
+       <version>2.1.1</version>
+   </dependency>
+
+    <!-- Spring Data JDBC -->
+    <dependency>
+        <groupId>org.springframework.data</groupId>
+        <artifactId>spring-data-jdbc</artifactId>
+        <version>3.4.5</version>
+    </dependency>
+
+    <dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-jdbc</artifactId>
+    <version>6.2.6</version>
+</dependency>
+
+    <!-- H2 Database -->
+    <dependency>
+        <groupId>com.h2database</groupId>
+        <artifactId>h2</artifactId>
+        <version> 2.3.232</version>
+        <scope>runtime</scope>
     </dependency>
 </dependencies>
-             
-        
+                  
 
-=======
-        
-
-        
-        
-    </dependencies>
-
->>>>>>> dd070a7911ea1426b3b517f9b21e92e8d78dab4d
     <build>
         <plugins>
             <!-- Plugin para compilar con Maven -->
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>3.8.1</version>
+            
+               <groupId>org.apache.maven.plugins</groupId>
+                 <artifactId>maven-jar-plugin</artifactId>
+                  <version>3.4.2</version>
+
                 <configuration>
                     
                 </configuration>

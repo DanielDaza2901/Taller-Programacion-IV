@@ -1,0 +1,14 @@
+co\edu\itc\progrmacion\Computador.class
+co\edu\itc\progrmacion\ComputadorRepository.class
+co\edu\itc\progrmacion\Libro.class
+co\edu\itc\progrmacion\AppConfig.class
+co\edu\itc\progrmacion\RecursoRepositorio.class
+co\edu\itc\progrmacion\Periodico.class
+co\edu\itc\progrmacion\Repositorio.class
+co\edu\itc\progrmacion\Recurso.class
+co\edu\itc\progrmacion\AppNamePrinter.class
+co\edu\itc\progrmacion\ServicioBiblioteca.class
+co\edu\itc\progrmacion\LibroRepository.class
+co\edu\itc\progrmacion\Main.class
+co\edu\itc\progrmacion\PeriodicoRepository.class
+co\edu\itc\progrmacion\TipoComputador.class
