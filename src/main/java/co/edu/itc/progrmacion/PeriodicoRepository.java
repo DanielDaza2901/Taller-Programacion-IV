@@ -2,9 +2,10 @@ package co.edu.itc.progrmacion;
 
 import java.util.List;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 import org.springframework.data.jdbc.repository.query.Query;
 
-
+@Repository
 public interface PeriodicoRepository extends CrudRepository<Periodico, Integer> {
 
     @Query("""
