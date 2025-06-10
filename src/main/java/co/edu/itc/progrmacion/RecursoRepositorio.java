@@ -2,6 +2,8 @@ package co.edu.itc.progrmacion;
 
 import java.util.Collection;
 
+import co.edu.itc.progrmacion.model.Recurso;
+
 public interface RecursoRepositorio<T extends Recurso>  {
     void agregar(T elemento);
     void eliminar(T elemento);
