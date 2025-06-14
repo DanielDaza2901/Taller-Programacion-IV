@@ -1,5 +1,5 @@
 # Directorios de construcción
-target/
+/target/
 
 # Configuración de VSCode
 .vscode/
