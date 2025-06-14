@@ -2,29 +2,28 @@
 <html>
 <head>
     <title>Biblioteca Digital</title>
-    <style>
-        .resource-form { margin: 20px; padding: 10px; border: 1px solid #ccc; }
-        .resource-list { margin: 20px; }
-    </style>
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
     <h1>Biblioteca Digital</h1>
     
-    <div class="resource-form">
-        <h2>Agregar Recurso</h2>
-        <select id="tipoRecurso">
-            <option value="libro">Libro</option>
-            <option value="periodico">Periódico</option>
-            <option value="computador">Computador</option>
-        </select>
-        
-        <div id="formContainer"></div>
-        <button onclick="agregarRecurso()">Agregar</button>
-    </div>
+    <div class="container">
+      <div class="resource-form">
+          <h2>Agregar Recurso</h2>
+          <select id="tipoRecurso">
+              <option value="libro">Libro</option>
+              <option value="periodico">Periódico</option>
+              <option value="computador">Computador</option>
+          </select>
+          
+          <div id="formContainer"></div>
+          <button onclick="agregarRecurso()">Agregar</button>
+      </div>
 
-    <div class="resource-list">
-        <h2>Recursos Existentes</h2>
-        <div id="listaRecursos"></div>
+      <div class="resource-list">
+          <h2>Recursos Existentes</h2>
+          <div id="listaRecursos"></div>
+      </div>
     </div>
 
     <script>

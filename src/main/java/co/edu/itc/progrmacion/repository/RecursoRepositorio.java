@@ -1,4 +1,4 @@
-package co.edu.itc.progrmacion;
+package co.edu.itc.progrmacion.repository;
 
 import java.util.Collection;
 
