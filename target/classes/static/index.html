@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Biblioteca Digital</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <h1>Biblioteca Digital</h1>
+    
+    <div class="container">
+      <div class="resource-form">
+          <h2>Agregar Recurso</h2>
+          <select id="tipoRecurso">
+              <option value="libro">Libro</option>
+              <option value="periodico">Periódico</option>
+              <option value="computador">Computador</option>
+          </select>
+          
+          <div id="formContainer"></div>
+          <button onclick="agregarRecurso()">Agregar</button>
+      </div>
+
+      <div class="resource-list">
+          <h2>Recursos Existentes</h2>
+          <div id="listaRecursos"></div>
+      </div>
+    </div>
+
+    <script>
+        document.getElementById('tipoRecurso').addEventListener('change', actualizarFormulario);
+        
+        function actualizarFormulario() {
+            const tipo = document.getElementById('tipoRecurso').value;
+            let campos = '';
+            
+            if(tipo === 'libro') {
+                campos = `
+                    <input type="text" id="nombre" placeholder="Nombre">
+                    <input type="text" id="autor" placeholder="Autor">
+                    <input type="text" id="editorial" placeholder="Editorial">
+                    <input type="number" id="anio" placeholder="Año">
+                `;
+            } else if(tipo === 'periodico') {
+                campos = `
+                    <input type="text" id="nombre" placeholder="Nombre">
+                    <input type="date" id="fechaPublicacion">
+                    <input type="text" id="editorial" placeholder="Editorial">
+                `;
+            } else {
+                campos = `
+                    <input type="text" id="nombre" placeholder="Nombre">
+                    <input type="text" id="marca" placeholder="Marca">
+                    <input type="text" id="modelo" placeholder="Modelo">
+                    <input type="text" id="sistemaOperativo" placeholder="Sistema Operativo">
+                    <select id="tipo">
+                        <option value="PORTATIL">Portátil</option>
+                        <option value="ESCRITORIO">Escritorio</option>
+                        <option value="TABLET">Tablet</option>
+                    </select>
+                `;
+            }
+            
+            document.getElementById('formContainer').innerHTML = campos;
+        }
+
+        async function cargarRecursos() {
+            try {
+                const response = await fetch('http://localhost:8080/api/recursos');
+                const recursos = await response.json();
+                
+                let html = '<ul>';
+                recursos.forEach(recurso => {
+                    html += `
+                        <li>
+                            ${recurso.nombre} (${recurso.tipo})
+                            <button onclick="eliminarRecurso('${recurso.nombre}')">Eliminar</button>
+                        </li>
+                    `;
+                });
+                html += '</ul>';
+                
+                document.getElementById('listaRecursos').innerHTML = html;
+            } catch (error) {
+                console.error('Error cargando recursos:', error);
+            }
+        }
+
+        async function agregarRecurso() {
+            const tipo = document.getElementById('tipoRecurso').value;
+            let body = {};
+            
+            try {
+                if(tipo === 'libro') {
+                    body = {
+                        nombre: document.getElementById('nombre').value,
+                        autor: document.getElementById('autor').value,
+                        editorial: document.getElementById('editorial').value,
+                        anio: parseInt(document.getElementById('anio').value)
+                    };
+                    await fetch('http://localhost:8080/api/recursos/libros', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(body)
+                    });
+                } else if(tipo === 'periodico') {
+                    body = {
+                        nombre: document.getElementById('nombre').value,
+                        fechaPublicacion: document.getElementById('fechaPublicacion').value,
+                        editorial: document.getElementById('editorial').value
+                    };
+                    await fetch('http://localhost:8080/api/recursos/periodicos', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(body)
+                    });
+                } else {
+                    body = {
+                        nombre: document.getElementById('nombre').value,
+                        marca: document.getElementById('marca').value,
+                        modelo: document.getElementById('modelo').value,
+                        sistemaOperativo: document.getElementById('sistemaOperativo').value,
+                        tipo: document.getElementById('tipo').value
+                    };
+                    await fetch('http://localhost:8080/api/recursos/computadores', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(body)
+                    });
+                }
+                
+                cargarRecursos();
+            } catch (error) {
+                console.error('Error agregando recurso:', error);
+            }
+        }
+
+        async function eliminarRecurso(nombre) {
+            try {
+                await fetch(`http://localhost:8080/api/recursos/${nombre}`, {
+                    method: 'DELETE'
+                });
+                cargarRecursos();
+            } catch (error) {
+                console.error('Error eliminando recurso:', error);
+            }
+        }
+
+        // Cargar recursos al iniciar
+        actualizarFormulario();
+        cargarRecursos();
+    </script>
+</body>
+</html>

@@ -1,0 +1,131 @@
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: linear-gradient(120deg, #f8fafc 0%, #e2e8f0 100%);
+  color: #22223b;
+  min-height: 100vh;
+  padding: 30px 0;
+}
+
+h1 {
+  text-align: center;
+  color: #3a5a40;
+  margin-bottom: 24px;
+  font-size: 2.5rem;
+  letter-spacing: 2px;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 4px 24px rgba(60, 60, 90, 0.08);
+  padding: 32px 24px;
+}
+
+.resource-form {
+  margin-bottom: 40px;
+}
+
+label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+input, select {
+  width: 100%;
+  padding: 8px 10px;
+  margin-bottom: 16px;
+  border: 1px solid #b7b7b7;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.2s;
+}
+
+input:focus, select:focus {
+  border-color: #52b788;
+  outline: none;
+}
+
+button {
+  background: #52b788;
+  color: #fff;
+  padding: 10px 24px;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background 0.2s;
+}
+
+button:hover {
+  background: #40916c;
+}
+
+.resource-list {
+  margin-top: 30px;
+}
+
+.resource-list ul {
+  list-style: none;
+  padding: 0;
+}
+
+.resource-list li {
+  background: #f1faee;
+  margin-bottom: 12px;
+  padding: 14px 18px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 1px 6px rgba(80, 120, 100, 0.05);
+}
+
+.resource-list .resource-details {
+  flex: 1;
+}
+
+.resource-list .delete-btn {
+  background: #e63946;
+  color: #fff;
+  border: none;
+  padding: 7px 16px;
+  border-radius: 5px;
+  margin-left: 18px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.resource-list .delete-btn:hover {
+  background: #b51b31;
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 16px 6px;
+  }
+  h1 {
+    font-size: 1.5rem;
+  }
+  .resource-list li {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .resource-list .delete-btn {
+    margin-left: 0;
+    margin-top: 8px;
+    width: 100%;
+  }
+}
